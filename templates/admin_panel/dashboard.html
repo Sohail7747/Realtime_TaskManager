@@ -1,0 +1,11 @@
+{% extends "admin_panel/base.html" %}{% block title %}Dashboard · TaskFlow{% endblock %}{% block heading %}Dashboard overview{% endblock %}
+{% block admin_content %}
+<div class="page-heading"><div><span class="eyebrow">AT A GLANCE</span><h1>Good to see you, {{ request.user.username }}</h1><p class="muted">Monitor users and shared task activity.</p></div></div>
+<div class="row g-3 mb-4">
+<div class="col-sm-6 col-xl"><div class="stat-card"><span>Total users</span><strong>{{ total_users }}</strong><small>Registered accounts</small></div></div>
+<div class="col-sm-6 col-xl"><div class="stat-card"><span>Active users</span><strong>{{ active_users }}</strong><small>Enabled accounts</small></div></div>
+<div class="col-sm-6 col-xl"><div class="stat-card"><span>Total tasks</span><strong>{{ total_tasks }}</strong><small>Shared task board</small></div></div>
+<div class="col-sm-6 col-xl"><div class="stat-card"><span>Running</span><strong class="text-success">{{ running_tasks }}</strong><small>Currently in progress</small></div></div>
+<div class="col-sm-6 col-xl"><div class="stat-card"><span>Stopped</span><strong>{{ stopped_tasks }}</strong><small>Not currently running</small></div></div></div>
+<div class="row g-3"><div class="col-lg-6"><div class="card panel-card h-100"><div class="card-body"><h5>Users</h5><p class="muted">Create, edit, activate and remove user accounts.</p><a class="btn btn-primary" href="{% url 'admin_users' %}">Manage users</a></div></div></div><div class="col-lg-6"><div class="card panel-card h-100"><div class="card-body"><h5>Tasks</h5><p class="muted">Review, edit, delete and control all tasks.</p><a class="btn btn-primary" href="{% url 'admin_tasks' %}">Manage tasks</a></div></div></div></div>
+{% endblock %}

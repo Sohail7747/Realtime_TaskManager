@@ -1,0 +1,15 @@
+{% extends "accounts/auth_base.html" %}
+{% block title %}Login · TaskFlow{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <div class="brand-mark">TF</div>
+  <h1>Welcome back</h1><p class="muted">Sign in to your task workspace.</p>
+  {% for message in messages %}<div class="alert alert-danger py-2">{{ message }}</div>{% endfor %}
+  <form method="post">{% csrf_token %}
+    <label class="form-label">Username</label><input class="form-control mb-3" name="username" required autofocus>
+    <label class="form-label">Password</label><input class="form-control mb-3" type="password" name="password" required>
+    <button class="btn btn-primary w-100">Sign in</button>
+  </form>
+  <p class="text-center mt-3 mb-0">New here? <a href="{% url 'register' %}">Create an account</a></p>
+</div>
+{% endblock %}

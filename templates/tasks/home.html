@@ -1,0 +1,27 @@
+{% extends "tasks/user_base.html" %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">SHARED WORKSPACE</span><h1>Task board</h1><p class="muted">Changes to task status appear live for everyone.</p></div><span id="connection" class="connection-pill">Connecting…</span></div>
+<div class="card panel-card mb-4"><div class="card-body"><h5 class="mb-3">Create a task</h5>
+<form id="create-task-form" class="row g-3"><div class="col-lg-5"><label class="form-label">Task name</label><input class="form-control" name="task_name" maxlength="200" required placeholder="e.g. Prepare monthly report"></div>
+<div class="col-md-3 col-lg-3"><label class="form-label">Date</label><input class="form-control" type="date" name="date" required></div>
+<div class="col-md-3 col-lg-2"><label class="form-label">Time</label><input class="form-control" type="time" name="time" required></div>
+<div class="col-md-3 col-lg-2 d-flex align-items-end"><button class="btn btn-primary w-100">Add task</button></div></form><div id="form-message" class="small mt-2"></div></div></div>
+<div class="d-flex justify-content-between align-items-center mb-3"><h5 class="mb-0">All tasks <span class="text-secondary fs-6" id="task-count"></span></h5><span class="muted small">Shared live status</span></div>
+<div id="task-list" class="task-list"><div class="empty-state">Loading tasks…</div></div>
+<div class="modal fade" id="task-history-modal" tabindex="-1" aria-labelledby="task-history-title" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header"><div><h5 class="modal-title" id="task-history-title">Task history</h5><div class="small muted">Start and stop activity</div></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+        <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Action</th><th>Username</th><th>Date</th><th>Time</th></tr></thead><tbody id="task-history-rows"></tbody></table></div>
+        <div id="task-history-empty" class="empty-state d-none">No start or stop activity recorded yet.</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>window.CURRENT_USER_ID={{ request.user.id }};window.IS_STAFF={{ request.user.is_staff|yesno:"true,false" }};window.TASK_API_URL="{% url 'task_list_create' %}";window.WS_URL=(location.protocol==="https:"?"wss://":"ws://")+location.host+"/ws/tasks/";</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/tasks.js"></script>
+{% endblock %}
